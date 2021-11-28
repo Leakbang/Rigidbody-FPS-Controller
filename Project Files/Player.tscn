@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/move.gd" type="Script" id=1]
+[ext_resource path="res://scripts/look.gd" type="Script" id=2]
+[ext_resource path="res://misc/Theme.tres" type="Theme" id=3]
+
+[sub_resource type="PhysicsMaterial" id=8]
+
+[sub_resource type="CylinderShape" id=7]
+height = 3.6
+
+[node name="Player" type="RigidBody" groups=["Player"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+mode = 2
+mass = 2.04082
+physics_material_override = SubResource( 8 )
+can_sleep = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 7 )
+
+[node name="UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI"]
+margin_left = 49.3253
+margin_top = 43.0945
+margin_right = 154.325
+margin_bottom = 71.0945
+theme = ExtResource( 3 )
+text = "Velocity"
+
+[node name="SpringArm" type="SpringArm" parent="."]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+fov = 80.0
+script = ExtResource( 2 )

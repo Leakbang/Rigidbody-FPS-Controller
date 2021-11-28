@@ -4,7 +4,11 @@ onready var player = get_parent()
 
 var mouse_move : Vector2 = Vector2.ZERO
 var mouse_rotation_x : float = 0.0
+var mouse_rotation_y : float = 0.0
 var mouse_sensitivity : float = 0.1
+
+var forward : Vector3
+var left : Vector3
 
 var y_offset : float = 1.25   
 
@@ -17,12 +21,15 @@ func _input(event):
 		mouse_move = event.relative * 0.1
 		mouse_rotation_x -= event.relative.y * mouse_sensitivity
 		mouse_rotation_x = clamp(mouse_rotation_x, -90, 90)
-		player.rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
-		
-
+		mouse_rotation_y -= event.relative.x * mouse_sensitivity
 
 func _physics_process(delta):
-	# Set points of origin
-	rotation_degrees = Vector3(mouse_rotation_x, 0, 0)
-	transform.origin = Vector3(0, y_offset, 0)
+	
+	var forward_vec = Vector3.RIGHT
+	var left_vec = Vector3.BACK
+	var basis = get_transform().basis
+	forward = basis.xform(forward_vec)
+	left = basis.xform(left_vec)
+	
+	rotation_degrees = Vector3(mouse_rotation_x, mouse_rotation_y, 0)
 

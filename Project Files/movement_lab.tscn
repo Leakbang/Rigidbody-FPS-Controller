@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://materials/dark_grey.tres" type="Material" id=1]
 [ext_resource path="res://materials/sky.exr" type="Texture" id=2]
 [ext_resource path="res://objects/Crate.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scripts/move.gd" type="Script" id=4]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/Can.tscn" type="PackedScene" id=6]
 [ext_resource path="res://materials/orange.tres" type="Material" id=7]
-[ext_resource path="res://misc/Theme.tres" type="Theme" id=8]
-[ext_resource path="res://scripts/look.gd" type="Script" id=9]
 
 [sub_resource type="PanoramaSky" id=4]
 radiance_size = 4
@@ -26,14 +24,6 @@ glow_bloom = 0.1
 glow_blend_mode = 0
 glow_bicubic_upscale = true
 
-[sub_resource type="PhysicsMaterial" id=8]
-
-[sub_resource type="CylinderMesh" id=6]
-height = 3.6
-
-[sub_resource type="CylinderShape" id=7]
-height = 3.6
-
 [node name="World" type="Spatial"]
 
 [node name="Lighting" type="Spatial" parent="."]
@@ -44,45 +34,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
 environment = SubResource( 5 )
-
-[node name="Player" type="RigidBody" parent="." groups=["Player"]]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 7, 0 )
-mode = 2
-mass = 2.04082
-physics_material_override = SubResource( 8 )
-can_sleep = false
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="MeshInstance" type="MeshInstance" parent="Player"]
-visible = false
-mesh = SubResource( 6 )
-skeleton = NodePath("")
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="Player"]
-shape = SubResource( 7 )
-
-[node name="Camera" type="Camera" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
-script = ExtResource( 9 )
-
-[node name="UI" type="Control" parent="Player"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Player/UI"]
-margin_left = 49.3253
-margin_top = 43.0945
-margin_right = 154.325
-margin_bottom = 71.0945
-theme = ExtResource( 8 )
-text = "Velocity"
 
 [node name="Geometry" type="Spatial" parent="."]
 
@@ -272,3 +223,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
 
 [node name="Can12" parent="Props/Cans" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5 )
+
+[node name="Crate9" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 2, 5 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 3, 1 )
